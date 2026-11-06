@@ -1,35 +1,37 @@
-# ДЗ #5 Node.js
+# Node.js Homework 05 · Crypto
 
-## 1. Завантажуємо репозиторій та розгортаємо проект
+Three functions built with `node:crypto`: SHA-256 hashing, PBKDF2 password hashing, and password verification. The solution is in [src/main.js](src/main.js).
 
-`npm install`
+## Run the tests
 
-або
+Use Node.js 24 and Yarn Classic. With Corepack:
 
-`yarn`
+```sh
+corepack yarn@1.22.22 install --frozen-lockfile
+npm test
+```
 
-_yarn повинен бути встановлений глобально, це можна зробити командой:_
+The test suite includes the original assignment tests and checks for default parameters, custom parameters, and malformed hashes.
 
-`npm i -g yarn`
+## Example
 
-## 2. Виконуємо задачі для .js файлів
+Run this from the project folder:
 
-## 3. Запускаємо тести
+```sh
+node --input-type=module <<'JS'
+import { randomBytes } from 'node:crypto'
+import { generateHash, generatePasswordHash, verifyPassword } from './src/main.js'
 
-`yarn test`
+console.log(generateHash('Hello, World!'))
 
-або
+const salt = randomBytes(16).toString('hex')
+const hash = generatePasswordHash('example-password', salt)
 
-`npm test`
+console.log(verifyPassword('example-password', hash, salt)) // true
+console.log(verifyPassword('wrong-password', hash, salt)) // false
+JS
+```
 
-## 4. Перевіряємо результат
+Both hashing functions return hex strings. PBKDF2 uses the assignment defaults: 10,000 iterations, a 64-byte key, and SHA-512. Use the same salt and parameters when verifying a password. These defaults are for the exercise.
 
-Якщо **тести не пройдені**
-
-- Аналізуйте результати тестів, ідентифікуйте та виправляйте помилки у коді.
-
-Якщо **тести пройдені**:
-
-1. Зробіть скріншот пройдених тестів та відправте його як доказ виконання завдання.
-2. Завантажте ваш проект на GitHub.
-3. Надайте пряме посилання на файл (або файли) JavaScript (або TypeScript) у вашому проекті.
+© 2026 Andrii Dolzhenko. All Rights Reserved.
