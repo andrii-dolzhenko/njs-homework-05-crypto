@@ -15,6 +15,8 @@ The test suite includes the original assignment tests and checks for default par
 
 ## Demo
 
+[Open Crypto Playground on GitHub Pages](https://andrii-dolzhenko.github.io/njs-homework-05-crypto/)
+
 The GitHub Pages build uses Web Crypto in the browser. The local demo uses the Node.js functions from this assignment.
 
 ### Run locally
