@@ -1,5 +1,21 @@
 const byId = id => document.getElementById(id)
 
+async function runOperation(data) {
+  if (document.documentElement.dataset.cryptoRuntime === 'browser') {
+    const { runBrowserCrypto } = await import('./browser-crypto.js')
+    return runBrowserCrypto(data)
+  }
+
+  const response = await fetch('/api/crypto', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  const result = await response.json()
+  if (!response.ok) throw new Error(result.error)
+  return result
+}
+
 function connectForm(name, operation, onResult, reset) {
   const form = byId(`${name}-form`)
   const status = byId(`${name}-status`)
@@ -14,13 +30,7 @@ function connectForm(name, operation, onResult, reset) {
     reset?.()
 
     try {
-      const response = await fetch('/api/crypto', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, operation })
-      })
-      const result = await response.json()
-      if (!response.ok) throw new Error(result.error)
+      const result = await runOperation({ ...data, operation })
       status.textContent = onResult(result)
     } catch {
       status.dataset.error = 'true'
@@ -29,6 +39,7 @@ function connectForm(name, operation, onResult, reset) {
       button.disabled = false
     }
   })
+  form.inert = false
 }
 
 connectForm('sha', 'sha256', ({ hash }) => {

@@ -15,6 +15,10 @@ The test suite includes the original assignment tests and checks for default par
 
 ## Demo
 
+The GitHub Pages build uses Web Crypto in the browser. The local demo uses the Node.js functions from this assignment.
+
+### Run locally
+
 From the project folder, run:
 
 ```sh

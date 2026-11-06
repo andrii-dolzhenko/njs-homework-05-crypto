@@ -15,7 +15,8 @@
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "build:pages": "node scripts/build-pages.js"
   },
   "engines": {
     "node": "24.x"
