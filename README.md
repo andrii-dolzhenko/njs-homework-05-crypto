@@ -13,6 +13,22 @@ npm test
 
 The test suite includes the original assignment tests and checks for default parameters, custom parameters, and malformed hashes.
 
+## Demo
+
+From the project folder, run:
+
+```sh
+npm run dev
+```
+
+Open [http://localhost:3000/](http://localhost:3000/).
+
+1. Click **Hash text** to generate a SHA-256 digest.
+2. Click **Derive hash** to generate a PBKDF2 hash. Leave the salt blank to generate one automatically. The hash and salt are copied to the verification form.
+3. Click **Verify password**, then change the candidate password and try again to see a mismatch.
+
+Use sample values only. The demo sends input to the Node.js server for processing.
+
 ## Example
 
 Run this from the project folder:
