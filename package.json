@@ -1,7 +1,8 @@
 {
   "name": "nodejs-hw05-tests",
   "version": "1.0.0",
-  "main": "index.js",
+  "type": "module",
+  "main": "src/main.js",
   "license": "MIT",
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",
