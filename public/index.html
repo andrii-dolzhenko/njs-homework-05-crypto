@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Try SHA-256, PBKDF2 and password verification in a small Node.js playground.">
+  <title>Crypto Playground · Node.js Homework 05</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <span class="brand"><span class="mark" aria-hidden="true">#</span> Crypto Playground</span>
+    <a href="https://github.com/andrii-dolzhenko/njs-homework-05-crypto">GitHub <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main>
+    <div class="intro">
+      <p class="eyebrow">NODE.JS HOMEWORK 05</p>
+      <h1>From input to hash<span>.</span></h1>
+      <p>Try SHA-256, derive a password hash with PBKDF2, and check whether another password matches.</p>
+      <p class="notice" id="demo-note">Use sample values only. The demo sends input to the server to compute the result.</p>
+    </div>
+    <noscript><p>Enable JavaScript to use the playground.</p></noscript>
+
+    <div class="workspace">
+      <section class="panel" aria-labelledby="sha-title">
+        <p class="eyebrow">01 / TEXT</p>
+        <h2 id="sha-title">SHA-256</h2>
+        <p>Turn any string into a 64-character hex digest.</p>
+        <form method="post" action="/api/crypto" id="sha-form">
+          <label for="text">Input text</label>
+          <textarea id="text" name="text" rows="3" maxlength="512">Hello, World!</textarea>
+          <button type="submit">Hash text</button>
+          <label for="sha-result">SHA-256 digest</label>
+          <textarea id="sha-result" rows="3" readonly></textarea>
+          <p class="status" id="sha-status" role="status"></p>
+        </form>
+      </section>
+
+      <section class="panel" aria-labelledby="derive-title">
+        <p class="eyebrow">02 / DERIVE</p>
+        <h2 id="derive-title">PBKDF2</h2>
+        <p>SHA-512 · 10,000 iterations · 64-byte key</p>
+        <form method="post" action="/api/crypto" id="derive-form" aria-describedby="demo-note">
+          <label for="password">Sample password</label>
+          <input id="password" name="password" value="example-password" maxlength="512" autocomplete="off" required>
+          <label for="salt">Salt <span class="muted">(optional)</span></label>
+          <input id="salt" name="salt" placeholder="Leave blank to generate" maxlength="512" autocomplete="off">
+          <button type="submit">Derive hash</button>
+          <label for="derive-result">Password hash</label>
+          <textarea id="derive-result" rows="3" readonly></textarea>
+          <p class="status" id="derive-status" role="status"></p>
+        </form>
+      </section>
+
+      <section class="panel" aria-labelledby="verify-title">
+        <p class="eyebrow">03 / VERIFY</p>
+        <h2 id="verify-title">Check a match</h2>
+        <p>Deriving a hash fills in the salt and hash here. Change the candidate to try a mismatch.</p>
+        <form method="post" action="/api/crypto" id="verify-form" aria-describedby="demo-note">
+          <label for="candidate">Candidate password</label>
+          <input id="candidate" name="password" value="example-password" maxlength="512" autocomplete="off" required>
+          <label for="verify-salt">Salt</label>
+          <input id="verify-salt" name="salt" maxlength="512" autocomplete="off" required>
+          <label for="verify-hash">Stored hash</label>
+          <textarea id="verify-hash" name="hash" rows="3" maxlength="512" spellcheck="false" required></textarea>
+          <button type="submit">Verify password</button>
+          <p class="status" id="verify-status" role="status"></p>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer>© 2026 Andrii Dolzhenko. All Rights Reserved.</footer>
+</body>
+</html>

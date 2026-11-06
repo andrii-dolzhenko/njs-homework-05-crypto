@@ -13,6 +13,10 @@ npm test
 
 The test suite includes the original assignment tests and checks for default parameters, custom parameters, and malformed hashes.
 
+## Try the demo locally
+
+Run `npm run dev` and open [localhost:3000](http://localhost:3000). The playground calls the same three functions over HTTP. Use sample values only.
+
 ## Example
 
 Run this from the project folder:
